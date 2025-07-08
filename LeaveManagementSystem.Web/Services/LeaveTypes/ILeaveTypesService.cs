@@ -1,6 +1,6 @@
 ﻿using LeaveManagementSystem.Web.Models.LeaveTypes;
 
-namespace LeaveManagementSystem.Web.Services
+namespace LeaveManagementSystem.Web.Services.LeaveTypes
 {
     public interface ILeaveTypesService
     {
@@ -12,5 +12,7 @@ namespace LeaveManagementSystem.Web.Services
         bool LeaveTypeExists(int id);
         Task<bool> CheckLeaveTypeNameExists(string name);
         Task<bool> CheckLeaveTypeNameExistsForEdit(LeaveTypeEditVM leaveTypeEdit);
+        Task<bool> DaysExceedMaximum(int leaveTypeId, int days);
+
     }
 }
