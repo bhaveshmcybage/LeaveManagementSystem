@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Leave Management System</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LeaveManagementSystem.Web.styles.css" asp-append-version="true" />
 </head>
@@ -33,9 +34,10 @@
 			                        Management
 		                        </a>
 		                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			                        <li><a class="dropdown-item text-dark" asp-controller="LeaveTypes" asp-action="Index">Leave Types</a></li>
-			                        <li><a class="dropdown-item text-dark" asp-controller="Periods" asp-action="Index">Periods</a></li>
-			                        <li><a class="dropdown-item text-dark" asp-controller="LeaveAllocations" asp-action="Index">View Employees</a></li>
+			                        <li><a class="dropdown-item" asp-controller="LeaveTypes" asp-action="Index">Leave Types</a></li>
+			                        <li><a class="dropdown-item" asp-controller="Periods" asp-action="Index">Periods</a></li>
+			                        <li><a class="dropdown-item" asp-controller="LeaveAllocations" asp-action="Index">View Employees</a></li>
+			                        <li><a class="dropdown-item" asp-controller="LeaveRequests" asp-action="ListRequests">Manage Requests</a></li>
 		                        </ul>
 	                        </li>
                         }
@@ -57,12 +59,14 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-dark">
-        <div class="container">
-            &copy; 2025 - Leave Management System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<footer class="border-top footer text-muted bg-dark">
+	<div class="container">
+		&copy; 2025 - Leave Management System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+	</div>
+</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/sweetalert/sweetalert.min.js"></script>
+    <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

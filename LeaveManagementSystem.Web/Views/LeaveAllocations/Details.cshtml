@@ -3,6 +3,7 @@
 @{
 	ViewData["Title"] = "View Allocations";
 	var isAdmin = User.IsInRole(Roles.Administrator);
+	var isEmployee = User.IsInRole(Roles.Employee);
 	string message = isAdmin ? "There are no allocations" : "You have no allocations. Please contact your Administrator";
 }
 
@@ -10,9 +11,16 @@
 <br/>
 @if (isAdmin)
 {
-	<a asp-action="Index" class="btn btn-primary"> Back to List</a>
+	<a asp-action="Index" class="btn btn-primary">Back to List</a>
 	<br />
 }
+
+@if (isEmployee)
+{
+	<a asp-controller="LeaveRequests" asp-action="Index" class="btn btn-primary">View Leave History</a>
+	<br />
+}
+
 <div>
 	<hr />
 	<dl class="row">
@@ -86,7 +94,7 @@
 							{
 								<a asp-action="EditAllocation" asp-route-id="@allocation.Id" class="btn btn-warning">Edit Allocation</a>
 							}
-							<a asp-controller="LeaveRequest" asp-action="Create" class="btn btn-success">Request Leave</a>
+							<a asp-controller="LeaveRequests" asp-action="Create" asp-route-leaveTypeId="@allocation.LeaveType.Id" class="btn btn-success">Request Leave</a>
 						</div>
 					</div>
 				</li>

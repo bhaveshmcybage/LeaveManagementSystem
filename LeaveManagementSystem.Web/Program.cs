@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using LeaveManagementSystem.Web.Services.LeaveAllocations;
+using LeaveManagementSystem.Web.Services.LeaveRequests;
+using LeaveManagementSystem.Web.Services.Periods;
+using LeaveManagementSystem.Web.Services.Users;
+using LeaveManagementSystem.Web.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<ILeaveTypesService, LeaveTypesService>();
 builder.Services.AddScoped<ILeaveAllocationsService, LeaveAllocationsService>();
+builder.Services.AddScoped<ILeaveRequestsService, LeaveRequestsService>();
+builder.Services.AddScoped<IPeriodsService, PeriodsService>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+
+builder.Services.AddAuthorization(options =>
+{
+	options.AddPolicy("AdminSupervisorOnly", policy =>
+    {
+        policy.RequireRole(Roles.Administrator, Roles.Supervisor);
+    });
+});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
