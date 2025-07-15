@@ -1,9 +1,6 @@
-﻿using LeaveManagementSystem.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace LeaveManagementSystem.Web.Controllers
+﻿namespace LeaveManagementSystem.Web.Controllers
 {
-	public class TestController : Controller
+    public class TestController : Controller
 	{
 		public IActionResult Index()
 		{

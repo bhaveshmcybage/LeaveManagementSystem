@@ -1,9 +1,4 @@
-﻿using LeaveManagementSystem.Web.Common;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace LeaveManagementSystem.Web.Controllers
+﻿namespace LeaveManagementSystem.Web.Controllers
 {
     [Authorize(Roles = Roles.Administrator)]
     public class PeriodsController : Controller

@@ -1,16 +1,10 @@
-﻿using AutoMapper;
-using LeaveManagementSystem.Web.Common;
-using LeaveManagementSystem.Web.Data;
-using LeaveManagementSystem.Web.Models.LeaveTypes;
-using LeaveManagementSystem.Web.Services.LeaveTypes;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using LeaveManagementSystem.Application.Models.LeaveTypes;
+using LeaveManagementSystem.Application.Services.LeaveTypes;
 
 namespace LeaveManagementSystem.Web.Controllers
 {
     [Authorize(Roles = Roles.Administrator)]
-    public class LeaveTypesController(ILeaveTypesService _leaveTypesService) : Controller
+    public class LeaveTypesController(ILeaveTypesService _leaveTypesService, ILogger<LeaveTypesController> _logger) : Controller
     {
         
         private const string NameExistsValidationMessage = "This leave type already exist in the database";
@@ -18,6 +12,7 @@ namespace LeaveManagementSystem.Web.Controllers
         // GET: LeaveTypes
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Loading Leave Types");
             var viewData = await _leaveTypesService.GetAll();
 			return View(viewData);
         }
@@ -62,6 +57,7 @@ namespace LeaveManagementSystem.Web.Controllers
                 await _leaveTypesService.Create(leaveTypeCreate);
                 return RedirectToAction(nameof(Index));
             }
+            _logger.LogWarning("Leave Type attempt failed due to some invalidity");
             return View(leaveTypeCreate);
         }
         
